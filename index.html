@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Индивидуальные тренировки — Магомедов Рустам Русланович</title>
+  <meta name="description" content="Индивидуальные тренировки по вольной борьбе в Краснодаре. Магомедов Рустам Русланович — МСМК, чемпион Европы." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">74</div>
+    <nav>
+      <a href="#about">О тренере</a>
+      <a href="#prices">Цены</a>
+      <a href="#booking">Запись</a>
+    </nav>
+    <a class="phone" href="tel:+79950050502">8 995 005-05-02</a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero__text">
+        <p class="eyebrow">10th Planet BJJ • Краснодар</p>
+        <h1>Индивидуальные тренировки по вольной борьбе</h1>
+        <p class="lead">Магомедов Рустам Русланович — мастер спорта международного класса по вольной борьбе, чемпион Европы. Персональный подход для детей и взрослых.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#booking">Записаться на тренировку</a>
+          <a class="btn btn--ghost" href="#prices">Смотреть цены</a>
+        </div>
+        <div class="promo">
+          <span>Промокод <b>СТАРТ20</b></span>
+          <strong>−20% на первые 2 тренировки</strong>
+        </div>
+      </div>
+      <div class="hero__card">
+        <img src="assets/coach-poster.png" alt="Индивидуальные тренировки с Магомедовым Рустамом Руслановичем" />
+      </div>
+    </section>
+
+    <section class="section info-grid" id="about">
+      <div class="section__head">
+        <p class="eyebrow">О тренировках</p>
+        <h2>Кому подойдут занятия</h2>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <span class="icon">01</span>
+          <h3>Начинающим</h3>
+          <p>Поставим базу, правильную технику, координацию и уверенность на ковре.</p>
+        </article>
+        <article class="card">
+          <span class="icon">02</span>
+          <h3>Детям и подросткам</h3>
+          <p>Дисциплина, физическая подготовка, развитие характера и спортивного мышления.</p>
+        </article>
+        <article class="card">
+          <span class="icon">03</span>
+          <h3>Спортсменам</h3>
+          <p>Индивидуальная работа над техникой, силой, выносливостью и соревновательными навыками.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section prices" id="prices">
+      <div class="section__head">
+        <p class="eyebrow">Стоимость</p>
+        <h2>Абонементы на тренировки</h2>
+        <p>Разовая тренировка — <b>4000 ₽</b>. Чем больше тренировок, тем выгоднее стоимость одного занятия.</p>
+      </div>
+      <div class="price-grid">
+        <article class="price-card">
+          <div class="price-card__top"><span>8 тренировок</span></div>
+          <strong>28 800 ₽</strong>
+          <p>3600 ₽ за тренировку</p>
+          <em>Экономия 3200 ₽</em>
+        </article>
+        <article class="price-card price-card--hit">
+          <div class="price-card__top"><span>10 тренировок</span><b>популярно</b></div>
+          <strong>34 000 ₽</strong>
+          <p>3400 ₽ за тренировку</p>
+          <em>Экономия 6000 ₽</em>
+        </article>
+        <article class="price-card">
+          <div class="price-card__top"><span>20 тренировок</span></div>
+          <strong>60 000 ₽</strong>
+          <p>3000 ₽ за тренировку</p>
+          <em>Экономия 20 000 ₽</em>
+        </article>
+      </div>
+    </section>
+
+    <section class="section booking" id="booking">
+      <div class="booking__text">
+        <p class="eyebrow">Запись</p>
+        <h2>Оставьте заявку</h2>
+        <p>Выберите удобный день. Время тренировки согласуем индивидуально после заявки.</p>
+        <ul class="facts">
+          <li><b>Зал:</b> 10th Planet BJJ</li>
+          <li><b>Адрес:</b> Краснодар, ул. Октябрьская 68/1</li>
+          <li><b>Формат:</b> индивидуальная тренировка</li>
+          <li><b>Оплата:</b> без онлайн-оплаты, запись по заявке</li>
+        </ul>
+      </div>
+
+      <form class="booking-form" id="bookingForm">
+        <label>
+          Ваше имя
+          <input type="text" name="name" placeholder="Например, Иван" required />
+        </label>
+        <label>
+          Телефон
+          <input type="tel" name="phone" placeholder="+7 ___ ___-__-__" required />
+        </label>
+        <label>
+          Удобный день
+          <select name="day" required>
+            <option value="">Выберите день</option>
+            <option>Понедельник</option>
+            <option>Вторник</option>
+            <option>Среда</option>
+            <option>Четверг</option>
+            <option>Пятница</option>
+            <option>Суббота</option>
+            <option>Воскресенье</option>
+          </select>
+        </label>
+        <label>
+          Удобное время
+          <select name="time" required>
+            <option value="">Выберите период</option>
+            <option>Утро</option>
+            <option>День</option>
+            <option>Вечер</option>
+            <option>Время по договоренности</option>
+          </select>
+        </label>
+        <label>
+          Комментарий
+          <textarea name="comment" rows="4" placeholder="Возраст, уровень подготовки, цель тренировки"></textarea>
+        </label>
+        <button class="btn btn--primary" type="submit">Записаться</button>
+        <p class="form-status" id="formStatus"></p>
+        <p class="privacy">Нажимая кнопку, вы соглашаетесь на обратную связь по указанному телефону.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <b>Магомедов Рустам Русланович</b>
+      <p>Индивидуальные тренировки по вольной борьбе</p>
+    </div>
+    <a href="tel:+79950050502">8 995 005-05-02</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "rustam-training-booking-site",
+  "version": "1.0.0",
+  "description": "Landing page with booking form and Telegram notifications for individual wrestling training.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "latest",
+    "express": "latest"
+  }
+}
