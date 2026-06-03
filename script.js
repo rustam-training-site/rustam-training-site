@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const form = document.querySelector("form");
-  const telegramUsername = "yyaallaavv";
+  const telegramUsername = "yyaallaavvv";
 
   if (!form) {
     console.log("Форма не найдена");
