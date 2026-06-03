@@ -1,28 +1,37 @@
-const form = document.getElementById('bookingForm');
-const statusEl = document.getElementById('formStatus');
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.querySelector("form");
+  const telegramUsername = "yyaallaavv";
 
-form.addEventListener('submit', async (event) => {
-  event.preventDefault();
-  statusEl.className = 'form-status';
-  statusEl.textContent = 'Отправляем заявку...';
-
-  const data = Object.fromEntries(new FormData(form).entries());
-
-  try {
-    const response = await fetch('/api/booking', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-
-    const result = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(result.error || 'Не удалось отправить заявку');
-
-    statusEl.className = 'form-status ok';
-    statusEl.textContent = 'Заявка отправлена. Мы свяжемся с вами для согласования времени.';
-    form.reset();
-  } catch (error) {
-    statusEl.className = 'form-status err';
-    statusEl.textContent = 'Заявку не удалось отправить автоматически. Позвоните: 8 995 005-05-02 или попробуйте позже.';
+  if (!form) {
+    console.log("Форма не найдена");
+    return;
   }
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const nameInput = form.querySelector('input[name="name"], input[type="text"]');
+    const phoneInput = form.querySelector('input[name="phone"], input[type="tel"]');
+    const selects = form.querySelectorAll("select");
+    const commentInput = form.querySelector("textarea");
+
+    const name = nameInput ? nameInput.value.trim() : "Не указано";
+    const phone = phoneInput ? phoneInput.value.trim() : "Не указан";
+    const day = selects[0] ? selects[0].value : "По договорённости";
+    const time = selects[1] ? selects[1].value : "По договорённости";
+    const comment = commentInput ? commentInput.value.trim() : "Без комментария";
+
+    const text =
+      `Здравствуйте! Хочу записаться на индивидуальную тренировку по вольной борьбе.\n\n` +
+      `Имя: ${name}\n` +
+      `Телефон: ${phone}\n` +
+      `Удобный день: ${day}\n` +
+      `Удобное время: ${time}\n` +
+      `Комментарий: ${comment}\n\n` +
+      `Адрес: 10th Planet BJJ, Краснодар, ул. Октябрьская 68/1`;
+
+    const telegramLink = `https://t.me/${telegramUsername}?text=${encodeURIComponent(text)}`;
+
+    window.location.href = telegramLink;
+  });
 });
