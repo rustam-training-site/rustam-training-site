@@ -1,73 +1,71 @@
-// Vercel/Netlify-style serverless endpoint for Telegram notifications.
-// Required environment variables:
-// TELEGRAM_BOT_TOKEN=123456:ABC...
-// TELEGRAM_CHAT_ID=123456789
+document.addEventListener("DOMContentLoaded", () => {
+  const timeSlotsContainer = document.getElementById("time-slots");
+  const selectedTimeInput = document.getElementById("selected-time");
+  const dateInput = document.getElementById("training-date");
 
-async function sendTelegramMessage(text) {
-  const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
+  if (!timeSlotsContainer || !selectedTimeInput || !dateInput) return;
 
-  if (!token || !chatId) {
-    throw new Error('Telegram bot token or chat id is not configured');
-  }
+  const times = [
+    "08:00", "09:00", "10:00", "11:00", "12:00",
+    "13:00", "14:00", "15:00", "16:00", "17:00",
+    "18:00", "19:00", "20:00"
+  ];
 
-  const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      chat_id: chatId,
-      text,
-      parse_mode: 'HTML',
-      disable_web_page_preview: true
-    })
-  });
+  // Сегодняшняя дата по умолчанию
+  const today = new Date().toISOString().split("T")[0];
+  dateInput.value = today;
+  dateInput.min = today;
 
-  if (!response.ok) {
-    const details = await response.text();
-    throw new Error(`Telegram error: ${details}`);
-  }
-}
+  async function getBusyTimes(date) {
+    try {
+      const response = await fetch(`/api/bookings?date=${date}`);
+      const data = await response.json();
 
-module.exports = async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+      if (Array.isArray(data.busyTimes)) {
+        return data.busyTimes;
+      }
 
-  try {
-    const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-    const { name, phone, day, time, comment } = body || {};
-
-    if (!name || !phone || !day || !time) {
-      return res.status(400).json({ error: 'Заполните имя, телефон, день и удобное время' });
+      return [];
+    } catch (error) {
+      console.error("Ошибка загрузки занятых часов:", error);
+      return [];
     }
-
-    const message = [
-      '🥇 <b>Новая заявка на индивидуальную тренировку</b>',
-      '',
-      `👤 <b>Имя:</b> ${escapeHtml(name)}`,
-      `📞 <b>Телефон:</b> ${escapeHtml(phone)}`,
-      `📅 <b>День:</b> ${escapeHtml(day)}`,
-      `⏰ <b>Время:</b> ${escapeHtml(time)}`,
-      comment ? `💬 <b>Комментарий:</b> ${escapeHtml(comment)}` : '',
-      '',
-      '📍 10th Planet BJJ, Краснодар, ул. Октябрьская 68/1',
-      '💰 Разовая тренировка: 4000 ₽',
-      '🎟 Промокод СТАРТ20: −20% на первые 2 тренировки'
-    ].filter(Boolean).join('\n');
-
-    await sendTelegramMessage(message);
-    return res.status(200).json({ ok: true });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: 'Ошибка отправки заявки' });
   }
-};
 
-function escapeHtml(value) {
-  return String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-}
+  async function renderTimeSlots() {
+    const selectedDate = dateInput.value;
+    const busyTimes = await getBusyTimes(selectedDate);
+
+    timeSlotsContainer.innerHTML = "";
+
+    times.forEach((time) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "time-slot";
+      button.textContent = time;
+
+      const isBusy = busyTimes.includes(time);
+
+      if (isBusy) {
+        button.classList.add("busy");
+        button.textContent = `${time} занято`;
+        button.disabled = true;
+      } else {
+        button.addEventListener("click", () => {
+          document.querySelectorAll(".time-slot").forEach((btn) => {
+            btn.classList.remove("selected");
+          });
+
+          button.classList.add("selected");
+          selectedTimeInput.value = time;
+        });
+      }
+
+      timeSlotsContainer.appendChild(button);
+    });
+  }
+
+  dateInput.addEventListener("change", renderTimeSlots);
+
+  renderTimeSlots();
+});
