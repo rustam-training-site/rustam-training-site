@@ -134,9 +134,34 @@
   <p class="booking-subtitle">Свободные окна можно выбрать. Занятые отображаются серым цветом.</p>
 
   <div class="date-box">
-    <label for="training-date">Выберите дату</label>
-    <input type="date" id="training-date" name="date">
-  </div>
+  <label class="form-label">Выберите дату тренировки</label>
+<input 
+  type="date" 
+  id="trainingDate" 
+  name="trainingDate" 
+  class="form-input"
+  required
+>
+
+<label class="form-label">Выберите время тренировки</label>
+
+<div class="time-slots" id="timeSlots">
+  <button type="button" data-time="08:00">08:00</button>
+  <button type="button" data-time="09:00">09:00</button>
+  <button type="button" data-time="10:00">10:00</button>
+  <button type="button" data-time="11:00">11:00</button>
+  <button type="button" data-time="12:00">12:00</button>
+  <button type="button" data-time="13:00">13:00</button>
+  <button type="button" data-time="14:00">14:00</button>
+  <button type="button" data-time="15:00">15:00</button>
+  <button type="button" data-time="16:00">16:00</button>
+  <button type="button" data-time="17:00">17:00</button>
+  <button type="button" data-time="18:00">18:00</button>
+  <button type="button" data-time="19:00">19:00</button>
+  <button type="button" data-time="20:00">20:00</button>
+</div>
+
+<input type="hidden" id="trainingTime" name="trainingTime" required>
 
   <div id="time-slots" class="time-slots"></div>
 
