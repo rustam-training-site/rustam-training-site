@@ -129,16 +129,19 @@
           </select>
         </label>
         <label>
-          Удобное время
-          <select name="time" required>
-            <option value="">Выберите период</option>
-            <option>Утро</option>
-            <option>День</option>
-            <option>Вечер</option>
-            <option>Время по договоренности</option>
-          </select>
-        </label>
-        <label>
+          <section class="booking-section">
+  <h2>Выберите время тренировки</h2>
+  <p class="booking-subtitle">Свободные окна можно выбрать. Занятые отображаются серым цветом.</p>
+
+  <div class="date-box">
+    <label for="training-date">Выберите дату</label>
+    <input type="date" id="training-date" name="date">
+  </div>
+
+  <div id="time-slots" class="time-slots"></div>
+
+  <input type="hidden" id="selected-time" name="time">
+</section>
           Комментарий
           <textarea name="comment" rows="4" placeholder="Возраст, уровень подготовки, цель тренировки"></textarea>
         </label>
