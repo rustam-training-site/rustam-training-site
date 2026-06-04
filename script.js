@@ -35,3 +35,50 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.href = telegramLink;
   });
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const phoneInput = document.querySelector('input[type="tel"], input[name="phone"], #phone');
+
+  if (!phoneInput) return;
+
+  // Сразу ставим +7, если поле пустое
+  if (!phoneInput.value.startsWith("+7")) {
+    phoneInput.value = "+7";
+  }
+
+  phoneInput.addEventListener("focus", () => {
+    if (!phoneInput.value.startsWith("+7")) {
+      phoneInput.value = "+7";
+    }
+  });
+
+  phoneInput.addEventListener("input", () => {
+    let value = phoneInput.value;
+
+    // Оставляем только цифры
+    let digits = value.replace(/\D/g, "");
+
+    // Если пользователь случайно начал с 7 или 8 — убираем первую цифру
+    if (digits.startsWith("7")) {
+      digits = digits.slice(1);
+    }
+
+    if (digits.startsWith("8")) {
+      digits = digits.slice(1);
+    }
+
+    // Ограничиваем до 10 цифр после +7
+    digits = digits.slice(0, 10);
+
+    phoneInput.value = "+7" + digits;
+  });
+
+  phoneInput.addEventListener("keydown", (e) => {
+    // Не даём удалить +7
+    if (
+      phoneInput.selectionStart <= 2 &&
+      (e.key === "Backspace" || e.key === "Delete")
+    ) {
+      e.preventDefault();
+    }
+  });
+});
