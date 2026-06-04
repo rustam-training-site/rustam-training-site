@@ -27,3 +27,84 @@ nav{display:flex;gap:22px;color:var(--muted);font-weight:600;font-size:14px}.pho
 .booking-form{display:grid;gap:16px}.booking-form label{display:grid;gap:8px;color:var(--text);font-weight:700}.booking-form input,.booking-form select,.booking-form textarea{width:100%;border:1px solid rgba(255,255,255,.12);background:#0c0c0c;color:var(--text);border-radius:14px;padding:15px 16px;font:inherit;outline:none}.booking-form input:focus,.booking-form select:focus,.booking-form textarea:focus{border-color:var(--gold)}.form-status{margin:0;min-height:20px;color:var(--muted);line-height:1.5}.form-status.ok{color:var(--ok)}.form-status.err{color:var(--danger)}.privacy{font-size:12px;color:var(--muted);margin:0;line-height:1.5}
 .footer{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:28px clamp(18px,5vw,72px);border-top:1px solid var(--line);color:var(--muted)}.footer b,.footer a{color:var(--text)}
 @media(max-width:900px){.hero,.booking{grid-template-columns:1fr}.hero{padding-top:42px}.cards,.price-grid{grid-template-columns:1fr}nav{display:none}.hero__card{max-width:520px}.footer{flex-direction:column;align-items:flex-start}}
+.booking-section {
+  margin: 40px auto;
+  padding: 28px;
+  max-width: 760px;
+  border-radius: 28px;
+  background: linear-gradient(145deg, #111111, #1c1c1c);
+  color: #ffffff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+.booking-section h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.booking-subtitle {
+  text-align: center;
+  color: #cfcfcf;
+  margin-bottom: 24px;
+  font-size: 15px;
+}
+
+.date-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.date-box label {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.date-box input {
+  padding: 16px;
+  border-radius: 16px;
+  border: none;
+  font-size: 16px;
+  outline: none;
+}
+
+.time-slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 14px;
+}
+
+.time-slot {
+  padding: 16px 12px;
+  border-radius: 18px;
+  border: none;
+  cursor: pointer;
+  background: #ffffff;
+  color: #111111;
+  font-size: 16px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.time-slot:hover {
+  transform: translateY(-2px);
+  background: #eeeeee;
+}
+
+.time-slot.selected {
+  background: #ff3b30;
+  color: #ffffff;
+}
+
+.time-slot.busy {
+  background: #777777;
+  color: #d6d6d6;
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.time-slot.busy:hover {
+  transform: none;
+}
