@@ -82,3 +82,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+document.addEventListener('DOMContentLoaded', function () {
+  const timeButtons = document.querySelectorAll('#timeSlots button');
+  const trainingTimeInput = document.getElementById('trainingTime');
+  const selectedTimeText = document.getElementById('selectedTimeText');
+
+  timeButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      if (button.classList.contains('busy')) {
+        return;
+      }
+
+      timeButtons.forEach(function (btn) {
+        btn.classList.remove('active');
+      });
+
+      button.classList.add('active');
+
+      const selectedTime = button.getAttribute('data-time');
+
+      trainingTimeInput.value = selectedTime;
+      selectedTimeText.value = selectedTime;
+    });
+  });
+});
